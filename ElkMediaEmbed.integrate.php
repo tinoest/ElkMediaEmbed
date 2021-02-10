@@ -55,7 +55,7 @@ class ElkMediaEmbed
 
         $codes[] = array(
             \BBC\Codes::ATTR_TAG                => 'media',
-			\BBC\Codes::ATTR_TYPE               => \BBC\Codes::TYPE_UNPARSED_EQUALS_CONTENT,
+            \BBC\Codes::ATTR_TYPE               => \BBC\Codes::TYPE_UNPARSED_EQUALS_CONTENT,
             \BBC\Codes::ATTR_CONTENT            => '$1',
             \BBC\Codes::ATTR_VALIDATE           => function( &$tag, &$data, $disabled ) {
                 self::parseContent($data);
