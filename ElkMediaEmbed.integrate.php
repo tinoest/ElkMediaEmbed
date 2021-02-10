@@ -72,10 +72,10 @@ class ElkMediaEmbed
         global $context;
 
         $where = $bbc_tags['row2'][3];
-        // And here we insert the new value after code
-        $bbc_tags['row2'][3] = elk_array_insert($where, 'link', array('media'), 'after', false);
+        // And here we insert the new value after email
+        $bbc_tags['row2'][3] = elk_array_insert($where, 'email', array('media'), 'after', false);
 
-        addInlineJavascript('
+        \theme()->addInlineJavascript('
             $.sceditor.command
                 .set("media", {
                     // Show the button on/off state
@@ -90,29 +90,12 @@ class ElkMediaEmbed
                     txtExec: ["[media]", "[/media]"],
                     tooltip: "Media"
                 }
-            );
-
-            $.sceditor.plugins.bbcode.bbcode
-                .set("media", {
-                    tags: {
-                        marquee: null,
-                    },
-                    isInline: false,
-                    format: function(element, content) {
-                        // Coming from wysiwyg (html) mode to bbc (text) mode
-                        return "[media]" + content + "[/media]";
-                    },
-                    html: function(element, attrs, content) {
-                        // Going to wysiwyg from bbc
-                        return "<media>" + content.replace("[", "&#91;") + "</media>";
-                    }
-                }
             );'
         );
 
 
         // Image to display
-        $context['html_headers'] .= '<style>.sceditor-button-media div {background: url(data:image/gif;base64,R0lGODlhFwAWAJECAAAAAP///////////yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJCgACACwAAAAAFwAWAAACL5SPqcvtD6OcVIJ7sNWCJ6BcmLiAIUl+4tqBbleW7xurLR2N46SZZgUMCofEIrEAACH5BAkKAAIALAAAAAAXABYAAAIwlI+py+0Po5w0gnsukDpjtSXaNoJLWSIjSgpkqJ7te4Ivbd0u/HzhVwkKh8SisVgAACH5BAkKAAIALAAAAAAXABYAAAIulI+py+0Po5z0gXsukDpjtSXaNnJdCY4kKaxmC39i2mKytbrRF97VDwwKh8RhAQAh+QQJCgACACwAAAAAFwAWAAACMJSPqcvtD6OctIF7LpA646htIdeNxoaMmCh8H7O2LSpb4ko/+E2eZ14JCofEovFYAAAh+QQJCgACACwAAAAAFwAWAAACMpSPqcvtD6OcdIF7LpA646htYbJZ3Zgp2CqIZfupYgsjrwy7JLP2XAm8VYbEovGITBoKACH5BAkKAAIALAAAAAAXABYAAAIxlI+py+0Po5w0gXsukDrjqG2hxYxj1mCi8LEnorIunIrqRi+3zeE+XgkKh8Si8agoAAAh+QQJCgACACwAAAAAFwAWAAACMpSPqcvtD6OcFAFwLpY3d95pW9Zogmg52HqOopmynzEua1ifZXtP25+rCIfEovGITBQAACH5BAkKAAIALAAAAAAXABYAAAIqlI+py+0Po5xUgVvPBVlsjoDPF0ocZnzkcopehKEaFLtmanf6zvf+nykAACH5BAkKAAIALAAAAAAXABYAAAIslI+py+0Po5w0AQDxuplxpIFeKJCHeYbXupajqKDGd8bvI5c5XPX+DwwKhwUAIfkECQoAAgAsAAAAABcAFgAAAiiUj6nL7Q+jnLQKgK3BIPbEfY2IhE5oZuSybl2rtKo2W5mG5/rO908BACH5BAUKAAIALAAAAAAXABYAAAItlI+py+0Po5yUglvPBZGnzXmLiIACWYLbGZ4NamDtq8iYFd7TDWf+DwwKh5ACADs=);}</style>';
+        $context['html_headers'] .= '<style>.sceditor-button-media div {background: url(\'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAaCAYAAACzdqxAAAAAQklEQVR42u2UMQoAMAgDfbo/bx1aEKdamqVc4BaHG4LEIkOBVhyxzTp6h+rQizO34swzMR3T8ZmYreCP6ZiO/9yKCRYcUkNRmtuZAAAAAElFTkSuQmCC\');}</style>';
 
     }}}
 
