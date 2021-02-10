@@ -82,7 +82,7 @@ class ElkMediaEmbed
                     state: function() {
                         var currentNode = this.currentNode();
 
-                        return $(currentNode).is("marquee") || $(currentNode).parents("marquee").length > 0 ? 1 : 0;
+                        return $(currentNode).is("media") || $(currentNode).parents("media").length > 0 ? 1 : 0;
                     },
                     exec: function () {
                         this.insert("[media] ", "[/media]", false)
@@ -104,7 +104,7 @@ class ElkMediaEmbed
                     },
                     html: function(element, attrs, content) {
                         // Going to wysiwyg from bbc
-                        return "<marquee>" + content.replace("[", "&#91;") + "</marquee>";
+                        return "<media>" + content.replace("[", "&#91;") + "</media>";
                     }
                 }
             );'
