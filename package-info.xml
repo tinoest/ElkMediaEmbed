@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.elkarte.net/site/package-info">
+<package-info xmlns="http://www.elkarte.net/site/package-info" xmlns:elk="http://www.elkarte.net/">
+    <id>tino:MediaEmbedBBC</id>
+    <name>Media Embed BBC</name>
+    <version>1.0.0</version>
+    <type>modification</type>
+    <install for="1.1.0 - 1.1.99">
+        <readme type="inline">This will install media bbcode addon for ElkArte 1.1.x</readme>
+        <require-file name="ElkMediaEmbed.integrate.php" destination="SUBSDIR" />
+        <hook hook="integrate_load_theme" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_load_theme" />
+        <hook hook="integrate_additional_bbc" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_additional_bbc" />
+        <hook hook="integrate_bbc_buttons" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_bbc_buttons" />
+        <hook hook="integrate_bbc_codes" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_bbc_codes" />
+        <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
+    </install>
+
+    <uninstall for="1.1.0 - 1.1.99">
+    <readme type="inline">This will uninstall media bbcode addon for ElkArte 1.1.x</readme>
+        <remove-file name="SUBSDIR/ElkMediaEmbed.integrate.php" />
+        <hook reverse="true" hook="integrate_load_theme" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_load_theme" />
+        <hook reverse="true" hook="integrate_additional_bbc" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_additional_bbc" />
+        <hook reverse="true" hook="integrate_bbc_buttons" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_bbc_buttons" />
+        <hook reverse="true" hook="integrate_bbc_codes" file="SUBSDIR/ElkMediaEmbed.integrate.php" function="ElkMediaEmbed::integrate_bbc_codes" />
+        <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
+    </uninstall>
+</package-info>
