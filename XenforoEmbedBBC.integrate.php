@@ -82,6 +82,12 @@ class XenforoEmbedBBC
 						return '<div style="position:relative; padding-bottom:56.25%; max-height:'.$matches[1].'px; max-width:'.$matches[3].'px"><iframe src="//gfycat.com/ifr/'.$matches[2].'" frameborder=\'0\' scrolling=\'no\' width=\'100%\' height=\'100%\' style=\'position:absolute;top:0;left:0;\' allowfullscreen></iframe></div>';
 					}
 					break;
+				case 'dailymotion':
+                    return '<div class="mediacontainer"><iframe allowfullscreen src="//www.dailymotion.com/embed/video/'.$data[0].'"></iframe></div>&nbsp;';
+					break;
+				case 'sendvid':
+                    return '<div class="mediacontainer"><iframe allowfullscreen src="//sendvid.com/embed/'.$data[0].'"></iframe></div>&nbsp;';
+					break;
                 default:
                     break;
             }
