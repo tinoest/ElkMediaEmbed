@@ -1,7 +1,8 @@
 <?php
 
-class XenforoEmbedBBC
+class MediaEmbedBBC
 {
+
     static public function integrate_load_theme() {{{
 
         \theme()->addCSSRules('
@@ -71,18 +72,40 @@ class XenforoEmbedBBC
 		);
     }}}
 
-    static public function parseContent(&$data) {{{
+    static public function integrate_preparse_code( &$message, $state, $previewing ) {{{
+        $db     = database();
+        $checks = array();
 
-        $db = database();
-
-        $result = $db->query('', 'SELECT bbc_match, html_replace FROM {db_prefix}media_embed WHERE site = {string:site}', array ('site' => $data[1]));
+        $result = $db->query('', 'SELECT site, match, bbc_replace FROM {db_prefix}media_embed WHERE 1=1');
         if($db->num_rows($result) > 0) {
-            $replace    = $db->fetch_assoc($result);
-            $result     = preg_replace('/'.$replace['bbc_match'].'/', $replace['html_replace'], $data[0]);
-            return $result;
+            while($row = $db->fetch_assoc($result)) {
+                $checks[] = $row;
+            }
+            $db->free_result($result);
         }
 
-        return '';
+        if(count($checks) > 0) {
+            foreach($checks as $check) {
+                if(!empty($check['match']) && preg_match('~'.$check['match'].'~', $message, $matches) === 1) {
+                    $message = preg_replace('~'.$check['match'].'~', '[media='.$check['site'].']'.$check['bbc_replace'].'[/media]', $message);
+                }
+            }
+        }
+
+    }}}
+
+    static public function parseContent(&$data) {{{
+        $db     = database();
+
+        $result = '';
+        $res    = $db->query('', 'SELECT bbc_match, html_replace FROM {db_prefix}media_embed WHERE site = {string:site}', array ('site' => $data[1]));
+        if($db->num_rows($res) > 0) {
+            $replace    = $db->fetch_assoc($res);
+            $result     = preg_replace('~'.$replace['bbc_match'].'~', $replace['html_replace'], $data[0]);
+        }
+        $db->free_result($res);
+
+        return $result;
 
     }}}
 

@@ -1,24 +1,26 @@
 <?xml version="1.0"?>
 <!DOCTYPE package-info SYSTEM "http://www.elkarte.net/site/package-info">
 <package-info xmlns="http://www.elkarte.net/site/package-info" xmlns:elk="http://www.elkarte.net/">
-    <id>tino:XenforoBBC</id>
-    <name>Xenforo Embed BBC</name>
+    <id>tino:MediaBBC</id>
+    <name>Media Embed BBC</name>
     <version>1.0.0</version>
     <type>modification</type>
     <install for="1.1.0 - 1.1.99">
-        <readme type="inline">This will install the Xenforo bbcode addon for ElkArte 1.1.x</readme>
-        <require-file name="XenforoEmbedBBC.integrate.php" destination="SUBSDIR" />
-        <hook hook="integrate_load_theme" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_load_theme" />
-        <hook hook="integrate_additional_bbc" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_additional_bbc" />
+        <readme type="inline">This will install the Media bbcode addon for ElkArte 1.1.x</readme>
+        <require-file name="MediaEmbedBBC.integrate.php" destination="SUBSDIR" />
+        <hook hook="integrate_load_theme" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_theme" />
+        <hook hook="integrate_additional_bbc" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_additional_bbc" />
+        <hook hook="integrate_preparse_code" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_preparse_code" />
 		<database>database.php</database>
         <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
     </install>
 
     <uninstall for="1.1.0 - 1.1.99">
-    <readme type="inline">This will uninstall Xenforo bbcode addon for ElkArte 1.1.x</readme>
-        <remove-file name="SUBSDIR/XenforoEmbedBBC.integrate.php" />
-        <hook reverse="true" hook="integrate_load_theme" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_load_theme" />
-        <hook reverse="true" hook="integrate_additional_bbc" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_additional_bbc" />
+    <readme type="inline">This will uninstall Media bbcode addon for ElkArte 1.1.x</readme>
+        <remove-file name="SUBSDIR/MediaEmbedBBC.integrate.php" />
+        <hook reverse="true" hook="integrate_load_theme" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_theme" />
+        <hook reverse="true" hook="integrate_additional_bbc" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_additional_bbc" />
+        <hook reverse="true" hook="integrate_preparse_code" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_preparse_code" />
         <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
     </uninstall>
 </package-info>
