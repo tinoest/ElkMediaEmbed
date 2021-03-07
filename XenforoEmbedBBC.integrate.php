@@ -72,28 +72,18 @@ class XenforoEmbedBBC
     }}}
 
     static public function parseContent(&$data) {{{
-        if(isset($data[1])) { 
-            switch($data[1]) {
-                case 'youtube':
-                    return '<div class="mediacontainer"><iframe allowfullscreen src="https://www.youtube.com/embed/'.$data[0].'?wmode=opaque" data-youtube-id="'.$data[0].'"></iframe></div>&nbsp;';
-					break;
-				case 'gfycat':
-					if(preg_match('/height=([0-9]+);id=([a-zA-Z]+);width=([0-9]+)/', $data[0], $matches)) {
-						return '<div style="position:relative; padding-bottom:56.25%; max-height:'.$matches[1].'px; max-width:'.$matches[3].'px"><iframe src="//gfycat.com/ifr/'.$matches[2].'" frameborder=\'0\' scrolling=\'no\' width=\'100%\' height=\'100%\' style=\'position:absolute;top:0;left:0;\' allowfullscreen></iframe></div>';
-					}
-					break;
-				case 'dailymotion':
-                    return '<div class="mediacontainer"><iframe allowfullscreen src="//www.dailymotion.com/embed/video/'.$data[0].'"></iframe></div>&nbsp;';
-					break;
-				case 'sendvid':
-                    return '<div class="mediacontainer"><iframe allowfullscreen src="//sendvid.com/embed/'.$data[0].'"></iframe></div>&nbsp;';
-					break;
-                default:
-                    break;
-            }
+
+        $db = database();
+
+        $result = $db->query('', 'SELECT bbc_match, html_replace FROM {db_prefix}media_embed WHERE site = {string:site}', array ('site' => $data[1]));
+        if($db->num_rows($result) > 0) {
+            $replace    = $db->fetch_assoc($result);
+            $result     = preg_replace('/'.$replace['bbc_match'].'/', $replace['html_replace'], $data[0]);
+            return $result;
         }
 
-        return $data[0];
+        return '';
+
     }}}
 
 }

@@ -9,7 +9,8 @@
         <readme type="inline">This will install the Xenforo bbcode addon for ElkArte 1.1.x</readme>
         <require-file name="XenforoEmbedBBC.integrate.php" destination="SUBSDIR" />
         <hook hook="integrate_load_theme" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_load_theme" />
-        <hook hook="integrate_addtional_bbc" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_additional_bbc" />
+        <hook hook="integrate_additional_bbc" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_additional_bbc" />
+		<database>database.php</database>
         <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
     </install>
 
@@ -17,7 +18,7 @@
     <readme type="inline">This will uninstall Xenforo bbcode addon for ElkArte 1.1.x</readme>
         <remove-file name="SUBSDIR/XenforoEmbedBBC.integrate.php" />
         <hook reverse="true" hook="integrate_load_theme" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_load_theme" />
-        <hook reverse="true" hook="integrate_addtional_bbc" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_additional_bbc" />
+        <hook reverse="true" hook="integrate_additional_bbc" file="SUBSDIR/XenforoEmbedBBC.integrate.php" function="XenforoEmbedBBC::integrate_additional_bbc" />
         <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
     </uninstall>
 </package-info>
