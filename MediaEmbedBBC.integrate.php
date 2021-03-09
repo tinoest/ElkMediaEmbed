@@ -72,7 +72,7 @@ class MediaEmbedBBC
 		);
     }}}
 
-    static public function integrate_preparse_code( &$message, $state, $previewing ) {{{
+    static public function integrate_preparse_tokenized_code( &$message, $state, $previewing ) {{{
         $db     = database();
         $checks = array();
 
