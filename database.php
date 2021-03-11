@@ -67,14 +67,23 @@ function addDefaults() {{{
  
         $data = array (
             'site'          => 'youtube',
-            'match'         => '',
-            'bbc_replace'   => '',
+            'match'         => 'htt(p|ps):\/\/[\w]+\.youtube\.com\/watch\?v=(?''id''[-0-9A-Z_a-z]+)',
+            'bbc_replace'   => '$2',
             'bbc_match'     => '[a-zA-Z0-9]+',
             'html_replace'  => '<div class="mediacontainer"><iframe allowfullscreen src="https://www.youtube.com/embed/$0?wmode=opaque" data-youtube-id="$0"></iframe></div>&nbsp;'
         );
 
         $db->insert('ignore', '{db_prefix}media_embed', array( 'site' => 'string', 'match' => 'string', 'bbc_replace' => 'string', 'bbc_match' => 'string', 'html_replace' => 'string' ), $data, array('site'));
     }
+
+    /*
+        INSERT INTO public.elkarte_media_embed VALUES ('youtube', 'htt(p|ps):\/\/[\w]+\.youtube\.com\/watch\?v=(?''id''[-0-9A-Z_a-z]+)', '$2', '[a-zA-Z0-9]+', '<div class="mediacontainer"><iframe allowfullscreen src="https://www.youtube.com/embed/$0?wmode=opaque" data-youtube-id="$0"></iframe></div>&nbsp;');
+        INSERT INTO public.elkarte_media_embed VALUES ('metacafe', 'htt(p|ps):\/\/[\w]+\.metacafe\.com\/watch\/(?''id''[\w\/]+)', '$2', '[a-zA-Z0-9/_]+', '<div class="mediacontainer"><iframe src="//www.metacafe.com/embed/$0"></iframe></div>&nbsp;');
+        INSERT INTO public.elkarte_media_embed VALUES ('dailymotion', 'htt(p|ps):\/\/[\w]+\.dailymotion\.com\/(?:live\/|swf\/|user\/[^#]+#video=|(?:related\/\d+\/)?video\/)(?''id''[\w-]+)', '$2', '[a-zA-Z0-9_-]+', '<div class="mediacontainer"><iframe allowfullscreen src="//www.dailymotion.com/embed/video/$0"></iframe></div>&nbsp;');
+        INSERT INTO public.elkarte_media_embed VALUES ('tiktok', 'htt(p|ps):\/\/[\w]+\.tiktok\.com/(?:@[.\w]+/video|v|i18n/share/video)/(?''id''\d+)', '$2', '[a-zA-Z0-9]+', '<div class="mediacontainer" style="max-width:340px;"><iframe allowfullscreen src="//www.tiktok.com/embed/$0"></iframe></div>&nbsp;');
+        INSERT INTO public.elkarte_media_embed VALUES ('gfycat', 'htt(p|ps):\/\/gfycat\.com\/(?!gaming|reactions|stickers|gifs\/tag)(?:gifs\/detail\/|ifr(?:ame)?\/)?(?''id''[\w]+)', 'height=640;id=$2;width=480', 'height=([0-9]+);id=([a-zA-Z_-]+);width=([0-9]+)', '<div style="position:relative; padding-bottom:56.25%; max-height:$1px; max-width:$3px"><iframe src="//gfycat.com/ifr/$2" frameborder=\''0\'' scrolling=\''no\'' width=\''100%\'' height=\''100%\'' style=\''position:absolute;top:0;left:0;\'' allowfullscreen></iframe></div>');
+        INSERT INTO public.elkarte_media_embed VALUES ('sendvid', 'htt(p|ps):\/\/[\w]+\.sendvid\.com/(?''id''\w+)', '$2', '[a-zA-Z0-9]+', '<div class="mediacontainer"><iframe allowfullscreen src="//sendvid.com/embed/$0"></iframe></div>&nbsp;');
+    */
 
 }}}
 
