@@ -7,20 +7,26 @@
     <type>modification</type>
     <install for="1.1.0 - 1.1.99">
         <readme type="inline">This will install the Media bbcode addon for ElkArte 1.1.x</readme>
-        <require-file name="MediaEmbedBBC.integrate.php" destination="SUBSDIR" />
-        <hook hook="integrate_load_theme" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_theme" />
-        <hook hook="integrate_additional_bbc" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_additional_bbc" />
-        <hook hook="integrate_preparse_tokenized_code" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_preparse_tokenized_code" />
+        <require-file name="MediaEmbedBBC.integrate.php" destination="SOURCEDIR" />
+        <require-file name="MediaEmbedBBC.controller.php" destination="ADMINDIR" />
+        <hook hook="integrate_load_theme" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_theme" />
+        <hook hook="integrate_additional_bbc" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_additional_bbc" />
+        <hook hook="integrate_admin_areas" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_admin_areas"/>
+        <hook hook="integrate_preparse_tokenized_code" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_preparse_tokenized_code" />
+		<hook hook="integrate_load_permissions" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_permissions"/>
 		<database>database.php</database>
         <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
     </install>
 
     <uninstall for="1.1.0 - 1.1.99">
     <readme type="inline">This will uninstall Media bbcode addon for ElkArte 1.1.x</readme>
-        <remove-file name="SUBSDIR/MediaEmbedBBC.integrate.php" />
-        <hook reverse="true" hook="integrate_load_theme" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_theme" />
-        <hook reverse="true" hook="integrate_additional_bbc" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_additional_bbc" />
-        <hook reverse="true" hook="integrate_preparse_tokenized_code" file="SUBSDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_preparse_tokenized_code" />
+        <remove-file name="SOURCEDIR/MediaEmbedBBC.integrate.php" />
+        <remove-file name="ADMINDIR/MediaEmbedBBC.controller.php" />
+        <hook reverse="true" hook="integrate_load_theme" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_theme" />
+        <hook reverse="true" hook="integrate_additional_bbc" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_additional_bbc" />
+        <hook reverse="true" hook="integrate_preparse_tokenized_code" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_preparse_tokenized_code" />
+        <hook reverse="true" hook="integrate_admin_areas" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_admin_areas"/>
+		<hook reverse="true" hook="integrate_load_permissions" file="SOURCEDIR/MediaEmbedBBC.integrate.php" function="MediaEmbedBBC::integrate_load_permissions"/>
         <redirect url="?action=admin;area=packages;sa=browse" timeout="750" />
     </uninstall>
 </package-info>

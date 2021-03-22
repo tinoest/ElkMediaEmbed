@@ -35,7 +35,7 @@ $tables = array(
     'media_embed' => array(
         'columns' => array(
             array('name' => 'site',         'type' => 'varchar',    'size' => 250)  + $type,
-            array('name' => 'match',        'type' => 'mediumtext') + $type,
+            array('name' => 'url_match',    'type' => 'mediumtext') + $type,
             array('name' => 'bbc_replace',  'type' => 'mediumtext') + $type,
             array('name' => 'bbc_match',    'type' => 'mediumtext') + $type,
             array('name' => 'html_replace', 'type' => 'mediumtext') + $type,
@@ -67,7 +67,7 @@ function addDefaults() {{{
  
         $data = array (
             'site'          => 'youtube',
-            'match'         => 'htt(p|ps):\/\/[\w]+\.youtube\.com\/watch\?v=(?''id''[-0-9A-Z_a-z]+)',
+            'match'         => 'htt(p|ps):\/\/[\w]+\.youtube\.com\/watch\?v=(?\'id\'[-0-9A-Z_a-z]+)',
             'bbc_replace'   => '$2',
             'bbc_match'     => '[a-zA-Z0-9]+',
             'html_replace'  => '<div class="mediacontainer"><iframe allowfullscreen src="https://www.youtube.com/embed/$0?wmode=opaque" data-youtube-id="$0"></iframe></div>&nbsp;'

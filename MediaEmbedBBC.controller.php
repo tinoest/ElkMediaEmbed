@@ -6,16 +6,52 @@ if (!defined('ELK')) {
 class MediaEmbedBBC_Controller extends Action_Controller {
 
     public function action_index() {{{
-        // We really only have one job to do..
-        $this->action_admin();
+
+        require_once(SUBSDIR . '/Action.class.php');
+        $subActions = array (
+            'add'       => array($this, 'action_edit', array()),
+            'delete'    => array($this, 'action_delete', array()),
+            'edit'      => array($this, 'action_edit', array()),
+            'list'      => array($this, 'action_list', array()),
+        );
+
+        if(isset($_REQUEST['sa'])) {
+            $sa     = $_REQUEST['sa'];
+        }
+        else {
+            $sa     = 'list';
+        }
+
+        $action     = new \Action();
+        $subAction  = $action->initialize($subActions, $sa);
+        $action->dispatch($subAction);
+    }}}
+
+    public function action_add() {{{
+        
+        loadLanguage('MediaEmbedBBC');
+        isAllowedTo('media_embed_manage');
 
     }}}
 
-    public function action_admin() {{{
+    public function action_delete() {{{
+
+        loadLanguage('MediaEmbedBBC');
+        isAllowedTo('media_embed_manage');
+
+    }}}
+
+    public function action_edit() {{{
+        
+        loadLanguage('MediaEmbedBBC');
+        isAllowedTo('media_embed_manage');
+
+    }}}
+
+    public function action_list() {{{
         global $context, $scripturl, $txt;
 
         loadLanguage('MediaEmbedBBC');
-
         isAllowedTo('media_embed_manage');
 
         $context['page_title'] = $txt['media-embed-title'];
@@ -23,9 +59,9 @@ class MediaEmbedBBC_Controller extends Action_Controller {
 		require_once(SUBSDIR . '/GenericList.class.php');
 
         $listOptions = array(
-            'id' => 'media_bbc_list',
+            'id'                => 'media_bbc_list',
             'items_per_page'    => 30,
-            'base_href'         => $scripturl . '?action=MediaEmbedBBC;',
+            'base_href'         => $scripturl . '?action=admin;area=embed_bbc',
             'default_sort_col'  => 'site',
             'get_items' => array(
 				'function' => array($this, 'list_get_media_bbc'),
@@ -40,7 +76,7 @@ class MediaEmbedBBC_Controller extends Action_Controller {
                     ),
                     'data' => array(
                         'db'        => 'site',
-                        'style'     => 'width: 10%;',
+                        'style'     => '',
                     ),
                     'sort' => array(
                         'default'   => 'site',
@@ -53,7 +89,7 @@ class MediaEmbedBBC_Controller extends Action_Controller {
                     ),
                     'data' => array(
                         'db'        => 'url_match',
-                        'style'     => 'width: 25%;',
+                        'style'     => '',
                     ),
                     'sort' =>  array(
                         'default'   => 'url_match',
@@ -66,7 +102,7 @@ class MediaEmbedBBC_Controller extends Action_Controller {
                     ),
                     'data' => array(
                         'db'        => 'bbc_replace',
-                        'style'     => 'width: 5%;',
+                        'style'     => '',
                     ),
                     'sort' =>  array(
                         'default'   => 'bbc_replace',
@@ -79,7 +115,7 @@ class MediaEmbedBBC_Controller extends Action_Controller {
                     ),
                     'data' => array(
                         'db'        => 'bbc_match',
-                        'style'     => 'width: 15%;',
+                        'style'     => '',
                     ),
                     'sort' =>  array(
                         'default'   => 'bbc_match',
@@ -92,9 +128,9 @@ class MediaEmbedBBC_Controller extends Action_Controller {
                     ),
                     'data' => array(
                         'function'  => function($rows) {
-                            return '<pre>'.htmlspecialchars($rows['html_replace']).'</pre>';
+                            return '<pre>'.htmlspecialchars(wordwrap($rows['html_replace'], 50)).'</pre>';
                         },
-                        'style'     => 'width: 35%; overflow: hidden;',
+                        'style'     => '',
                     ),
                     'sort' =>  array(
                         'default'   => 'html_replace',
@@ -109,10 +145,10 @@ class MediaEmbedBBC_Controller extends Action_Controller {
 					'data' => array(
 						'sprintf' => array (
 							'format' => '
-								<a href="?action=admin;area=MediaEmbedBBC;sa=edit;id=%1$d;' . $context['session_var'] . '=' . $context['session_id'] . '" accesskey="p">'.$txt['media-embed-edit'].'</a>&nbsp;
-								<a href="?action=admin;area=MediaEmbedBBC;sa=delete;id=%1$d;' . $context['session_var'] . '=' . $context['session_id'] . '" onclick="return confirm(' . JavaScriptEscape('Are you sure you want to delete?') . ') && submitThisOnce(this);" accesskey="d">'.$txt['media-embed-delete'].'</a>',
+								<a href="?action=admin;area=MediaEmbedBBC;sa=edit;site=%1$s;' . $context['session_var'] . '=' . $context['session_id'] . '" accesskey="p">'.$txt['media-embed-edit'].'</a>&nbsp;
+								<a href="?action=admin;area=MediaEmbedBBC;sa=delete;site=%1$s;' . $context['session_var'] . '=' . $context['session_id'] . '" onclick="return confirm(' . JavaScriptEscape('Are you sure you want to delete?') . ') && submitThisOnce(this);" accesskey="d">'.$txt['media-embed-delete'].'</a>',
 							'params' => array(
-								'id' => true,
+								'site' => true,
 							),
 						),
 						'class' => 'centertext nowrap',
