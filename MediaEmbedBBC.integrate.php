@@ -10,7 +10,7 @@ class MediaEmbedBBC
                 display: inline-block;
                 height: calc(40vw/1.77);
                 margin: 0 auto;
-                width: 40vw;
+                max-width: 40vw;
             }
             .mediacontainer iframe {
                 display:block;
@@ -76,7 +76,7 @@ class MediaEmbedBBC
         $db     = database();
         $checks = array();
 
-        $result = $db->query('', 'SELECT site, match, bbc_replace FROM {db_prefix}media_embed WHERE 1=1');
+        $result = $db->query('', 'SELECT site, url_match, bbc_replace FROM {db_prefix}media_embed WHERE 1=1');
         if($db->num_rows($result) > 0) {
             while($row = $db->fetch_assoc($result)) {
                 $checks[] = $row;
@@ -86,8 +86,8 @@ class MediaEmbedBBC
 
         if(count($checks) > 0) {
             foreach($checks as $check) {
-                if(!empty($check['match']) && preg_match('~'.$check['match'].'~', $message, $matches) === 1) {
-                    $message = preg_replace('~'.$check['match'].'~', '[media='.$check['site'].']'.$check['bbc_replace'].'[/media]', $message);
+                if(!empty($check['url_match']) && preg_match('~'.$check['url_match'].'~', $message, $matches) === 1) {
+                    $message = preg_replace('~'.$check['url_match'].'~', '[media='.$check['site'].']'.$check['bbc_replace'].'[/media]', $message);
                 }
             }
         }
@@ -109,4 +109,22 @@ class MediaEmbedBBC
 
     }}}
 
+    static public function integrate_admin_areas( &$adminArea ) {{{
+        global $txt;
+
+        loadLanguage('MediaEmbedBBC');
+
+        $adminArea['layout']['areas']['embed_bbc'] = array(
+            'label' => $txt['media-embed'],
+            'file' => 'MediaEmbedBBC.controller.php',
+            'controller' => 'MediaEmbedBBC_Controller',
+            'function' => 'action_index',
+            'permission' => array('manage_media_embed_bbc'),
+            'subsections' => array(
+                'main' => array($txt['media-embed-main'],   'manage_media_embed_bbc'),
+                'edit' => array($txt['media-embed-edit'],   'manage_media_embed_bbc'),
+            ),
+        );
+
+    }}}
 }
