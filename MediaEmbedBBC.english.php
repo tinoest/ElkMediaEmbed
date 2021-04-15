@@ -9,6 +9,7 @@ $txt['media-embed-url']     = 'URL';
 $txt['media-embed-bbc']     = 'BBC';
 $txt['media-embed-match']   = 'Match';
 $txt['media-embed-html']    = 'HTML';
+$txt['media-embed-list']    = 'List';
 $txt['media-embed-add']     = 'Add';
 $txt['media-embed-edit']    = 'Edit';
 $txt['media-embed-delete']  = 'Delete';

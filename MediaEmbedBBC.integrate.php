@@ -115,13 +115,13 @@ class MediaEmbedBBC
         loadLanguage('MediaEmbedBBC');
 
         $adminArea['layout']['areas']['embed_bbc'] = array(
-            'label' => $txt['media-embed'],
-            'file' => 'MediaEmbedBBC.controller.php',
-            'controller' => 'MediaEmbedBBC_Controller',
-            'function' => 'action_index',
-            'permission' => array('manage_media_embed_bbc'),
-            'subsections' => array(
-                'main' => array($txt['media-embed-main'],   'manage_media_embed_bbc'),
+            'label'         => $txt['media-embed'],
+            'file'          => 'MediaEmbedBBC.controller.php',
+            'controller'    => 'MediaEmbedBBC_Controller',
+            'function'      => 'action_index',
+            'permission'    => array('manage_media_embed_bbc'),
+            'subsections'   => array(
+                'list' => array($txt['media-embed-list'],   'manage_media_embed_bbc'),
                 'edit' => array($txt['media-embed-edit'],   'manage_media_embed_bbc'),
             ),
         );

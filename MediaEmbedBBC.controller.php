@@ -32,13 +32,25 @@ class MediaEmbedBBC_Controller extends Action_Controller {
         loadLanguage('MediaEmbedBBC');
         isAllowedTo('media_embed_manage');
 
+        self::action_list();
     }}}
 
     public function action_delete() {{{
 
         loadLanguage('MediaEmbedBBC');
         isAllowedTo('media_embed_manage');
+        checkSession('get');
 
+        $site = $this->_req->getQuery('site');
+        if(!empty($site)) {
+            $request    = database()->query('', '
+                DELETE FROM {db_prefix}media_embed
+                WHERE site = {string:site}',
+                array('site' => $site) 
+            );
+        }
+
+        self::action_list();
     }}}
 
     public function action_edit() {{{
@@ -46,6 +58,7 @@ class MediaEmbedBBC_Controller extends Action_Controller {
         loadLanguage('MediaEmbedBBC');
         isAllowedTo('media_embed_manage');
 
+        self::action_list();
     }}}
 
     public function action_list() {{{
@@ -145,8 +158,8 @@ class MediaEmbedBBC_Controller extends Action_Controller {
 					'data' => array(
 						'sprintf' => array (
 							'format' => '
-								<a href="?action=admin;area=MediaEmbedBBC;sa=edit;site=%1$s;' . $context['session_var'] . '=' . $context['session_id'] . '" accesskey="p">'.$txt['media-embed-edit'].'</a>&nbsp;
-								<a href="?action=admin;area=MediaEmbedBBC;sa=delete;site=%1$s;' . $context['session_var'] . '=' . $context['session_id'] . '" onclick="return confirm(' . JavaScriptEscape('Are you sure you want to delete?') . ') && submitThisOnce(this);" accesskey="d">'.$txt['media-embed-delete'].'</a>',
+								<a href="?action=admin;area=embed_bbc;sa=edit;site=%1$s;' . $context['session_var'] . '=' . $context['session_id'] . '" accesskey="p">'.$txt['media-embed-edit'].'</a>&nbsp;
+								<a href="?action=admin;area=embed_bbc;sa=delete;site=%1$s;' . $context['session_var'] . '=' . $context['session_id'] . '" onclick="return confirm(' . JavaScriptEscape('Are you sure you want to delete?') . ') && submitThisOnce(this);" accesskey="d">'.$txt['media-embed-delete'].'</a>',
 							'params' => array(
 								'site' => true,
 							),
@@ -156,7 +169,7 @@ class MediaEmbedBBC_Controller extends Action_Controller {
 				),
 			),
 			'form' => array(
-				'href' => $scripturl . '?action=admin;area=MediaEmbedBBC;sa=add;',
+				'href' => $scripturl . '?action=admin;area=embed_bbc;sa=add;',
 				'include_sort' => true,
 				'include_start' => true,
 				'hidden_fields' => array(
