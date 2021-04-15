@@ -127,4 +127,17 @@ class MediaEmbedBBC
         );
 
     }}}
+
+    public static function integrate_load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions) {{{
+
+        loadLanguage('MediaEmbedBBC');
+
+        $permissionList['membergroup'] = array_merge(
+            array(
+                'media_embed_manage'  => array(false, 'meb', 'meb'),
+            ),
+            $permissionList['membergroup']
+        );
+
+    }}}
 }

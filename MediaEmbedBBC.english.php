@@ -14,4 +14,6 @@ $txt['media-embed-add']     = 'Add';
 $txt['media-embed-edit']    = 'Edit';
 $txt['media-embed-delete']  = 'Delete';
 $txt['media-embed-actions'] = 'Actions';
+$txt['permissiongroup_meb']                 = 'Media Embed BBC Permissions';
+$txt['permissionname_media_embed_manage']   = 'Can Manage Media Embed BBC';
 
